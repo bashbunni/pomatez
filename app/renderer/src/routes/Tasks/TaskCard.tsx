@@ -56,7 +56,7 @@ const TaskCard: React.FC<Props> = ({
 				};
 			}
 		}
-	}, [editing, text]);
+	}, [editing, onSaveCardText, setEditing, text]);
 
 	const onEditCardAction = (
 		e: React.MouseEvent<HTMLButtonElement, MouseEvent>

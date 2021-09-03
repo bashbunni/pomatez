@@ -24,6 +24,25 @@ const TaskFormButton: React.FC<Props> = ({ forList, onSubmit }) => {
 
 	const [isOpen, setOpen] = useTargetOutside({ ref: formRef });
 
+	const doSubmit = useCallback(
+		(ref: HTMLInputElement | HTMLTextAreaElement) => {
+			const { value } = ref;
+			if (!value) return false;
+
+			if (onSubmit) {
+				onSubmit(value);
+				ref.focus();
+
+				if (formRef.current) {
+					formRef.current.reset();
+				}
+			}
+
+			return true;
+		},
+		[onSubmit]
+	);
+
 	useEffect(() => {
 		if (isOpen) {
 			if (forList) {
@@ -52,7 +71,7 @@ const TaskFormButton: React.FC<Props> = ({ forList, onSubmit }) => {
 				}
 			}
 		}
-	}, [isOpen, forList]);
+	}, [isOpen, forList, doSubmit]);
 
 	const onSubmitAction = useCallback(
 		(e: React.FormEvent<HTMLFormElement>) => {
@@ -66,24 +85,8 @@ const TaskFormButton: React.FC<Props> = ({ forList, onSubmit }) => {
 				}
 			}
 		},
-		[forList, onSubmit]
+		[doSubmit, forList]
 	);
-
-	const doSubmit = (ref: HTMLInputElement | HTMLTextAreaElement) => {
-		const { value } = ref;
-		if (!value) return false;
-
-		if (onSubmit) {
-			onSubmit(value);
-			ref.focus();
-
-			if (formRef.current) {
-				formRef.current.reset();
-			}
-		}
-
-		return true;
-	};
 
 	const showFormAction = () => setOpen && setOpen(true);
 
