@@ -47,6 +47,11 @@ export const StyledCounterContainer = styled.div<CounterContainerProps>`
 
   background-color: var(--color-bg-primary);
 
+  background-image: url("https://cdn.discordapp.com/icons/810615936691208245/b53898ee8efc125e3b6e24e281fc310e.webp");
+  background-repeat: no-repeat;
+  background-position: calc(100% - 16px) 100%;
+  background-size: 60px;
+
   position: relative;
 
   ${(p) =>
